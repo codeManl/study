@@ -1,0 +1,49 @@
+# 题解
+
+因为链表是逆序的，所以两个链表可以从头开始逐位相加，但两个链表可能不一样长，对于短的链表可以高位补 `0` 。
+
+需要注意的是，遍历完两个链表后，最高位需要进位而额外增加一位。
+
+下图演示了清晰的思路。
+![image.png](https://pic.leetcode-cn.com/1630052502-zWJIql-image.png)
+
+# 代码
+
+* c++
+
+```c++
+class Solution {
+public:
+    ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
+        ListNode* head = new ListNode();
+        ListNode* currentPos = head;
+        int v = 0;
+        while(l1 || l2 || v) {
+            int v1 = l1 ? l1->val : 0, v2 = l2 ? l2->val : 0;
+            int res = (v + v1 + v2) / 10;
+            v = (v1 + v2 + v) % 10;
+            currentPos->val = v;
+            v = res;
+            if (l1) l1 = l1->next;
+            if (l2) l2 = l2->next;
+            if (l1 || l2 || v) {
+                currentPos->next = new ListNode();
+                currentPos = currentPos->next;
+            }
+        }
+        return head;
+    }
+};
+```
+
+# 最后
+
+大家好，我是编程熊，字节跳动、旷视科技前员工，ACM亚洲区域赛金牌，欢迎 [关注我](https://leetcode-cn.com/u/bianchengxiong/) 。
+
+分享几篇算法超级易懂的文章，希望对你有所帮助
+1、[ACM金牌选手讲解LeetCode算法《线性表》](https://mp.weixin.qq.com/s/qwaYOFIksFVqZtA_nisl6g)
+2、[ACM金牌选手讲解LeetCode算法《栈和队列的高级应用》](https://mp.weixin.qq.com/s/I3DQOUmABmWav4nrAiI3Fg)
+3、[ACM金牌选手讲解LeetCode算法《哈希表》](https://mp.weixin.qq.com/s/af4gvYURUoCTfsyzsI9Www)
+4、[ACM金牌选手讲解LeetCode算法《二叉树》](https://mp.weixin.qq.com/s/8AcRNQS0Nno2_fU6kMtZeQ)
+
+如果题解和文章对你有所帮助，欢迎**点赞**支持

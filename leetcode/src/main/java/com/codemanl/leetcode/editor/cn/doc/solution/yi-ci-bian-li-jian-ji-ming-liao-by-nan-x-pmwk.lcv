@@ -1,0 +1,22 @@
+### 解题思路
+
+### 代码
+
+* java
+
+```java
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+      int N = s.length(),maxLength = 0,left = 0;
+      int[] charNum = new int[128];//存放s中字符的最新位置
+      for(int i = 0;i<N;i++){
+          int Value = s.charAt(i);
+          left = Math.max(left,charNum[Value]);//确定起点，如果上次该值出现的位置大于当前left，则更新left
+          maxLength = Math.max(maxLength,i+1-left);//计算最大值
+          charNum[Value] = i+1;//目前出现在数组中的位置(按下标+1算)
+      }
+      return maxLength;
+    }
+}
+```
+
