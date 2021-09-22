@@ -32,19 +32,20 @@ package com.codemanl.leetcode.editor.cn;
 // 注意：本题与主站 67 题相同：https://leetcode-cn.com/problems/add-binary/ 
 // Related Topics 位运算 数学 字符串 模拟 👍 2 👎 0
 
-public class JFETK5{
+public class JFETK5 {
     public static void main(String[] args) {
         Solution solution = new JFETK5().new Solution();
-        
+
     }
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public String addBinary(String a, String b) {
-        int la = a.length(); //length_a
-        int lb = b.length(); //length_b
-        while ()
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public String addBinary(String a, String b) {
+            int la = a.length(); //length_a
+            int lb = b.length(); //length_b
+            return "";
+        }
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }
