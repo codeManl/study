@@ -33,32 +33,48 @@ package com.codemanl.leetcode.editor.cn;
 // 注意：本题与主站 226 题相同：https://leetcode-cn.com/problems/invert-binary-tree/ 
 // Related Topics 树 深度优先搜索 广度优先搜索 二叉树 👍 175 👎 0
 
-public class ErChaShuDeJingXiangLcof{
+public class ErChaShuDeJingXiangLcof {
     public static void main(String[] args) {
         Solution solution = new ErChaShuDeJingXiangLcof().new Solution();
-        
+
     }
+
     public class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
-        TreeNode(int x) { val = x; }
-    }
-//leetcode submit region begin(Prohibit modification and deletion)
-/**
- * Definition for a binary tree node.
-  public class TreeNode {
-      int val;
-      TreeNode left;
-      TreeNode right;
-      TreeNode(int x) { val = x; }
-  }
- */
-class Solution {
-    public TreeNode mirrorTree(TreeNode root) {
 
+        TreeNode(int x) {
+            val = x;
+        }
     }
-}
+
+//leetcode submit region begin(Prohibit modification and deletion)
+
+    /**
+     * Definition for a binary tree node.
+     * public class TreeNode {
+     * int val;
+     * TreeNode left;
+     * TreeNode right;
+     * TreeNode(int x) { val = x; }
+     * }
+     */
+    class Solution {
+        public TreeNode mirrorTree(TreeNode root) {
+            if (root == null) {
+                return null;
+            }
+            // 先翻转，再递归
+            TreeNode temp = root.left;
+            root.left = root.right;
+            root.right = temp;
+
+            mirrorTree(root.left);
+            mirrorTree(root.right);
+            return root;
+        }
+    }
 //leetcode submit region end(Prohibit modification and deletion)
 
 }
