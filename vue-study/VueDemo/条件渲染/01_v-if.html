@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--v-show 用在对元素加display-none   v-if 如果为真才加载对应元素，为假则将其替换为空注释-->
+    <div v-show="true">{{ name }}</div>
+    <div v-if="true">{{ name }}</div>
+    v-show:
+    <div v-show="false">{{ name }}</div>
+    <br>
+    v-if:
+    <div v-if="false">{{ name }}</div>
+
+    <br>
+    <button v-on:click="click">{{ a }}加1</button>
+    <br><br><br>
+    <!-- 不能打断,如加标签会导致报错   -->
+    <div v-if="a == 1">哈哈1</div>
+    <div v-else-if="a == 2">哈哈2</div>
+    <!--    <div>@</div>-->
+    <div v-else-if="a == 3">哈哈3</div>
+    <h1 v-else> 哈哈4</h1>
+
+
+    <hr>
+<!-- template配合v-if使用    -->
+    <template v-if="a==5">
+        <h2>111</h2>
+        <h2>222</h2>
+        <h2>333</h2>
+    </template>
+</div>
+<script>
+    Vue.config.devtools = false
+    Vue.config.productionTip = false
+    const vm = new Vue({
+        data() {
+            return {
+                name: '张三',
+                a: 0
+            }
+        },
+        methods: {
+            click() {
+                this.a = this.a + 1
+            }
+        }
+    })
+    vm.$mount("#app")
+</script>
+</body>
+</html>

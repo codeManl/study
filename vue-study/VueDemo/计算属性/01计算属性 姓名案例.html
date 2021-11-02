@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01计算属性 姓名案例.html</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    {{ a }} <br>
+    姓:<input name="firstName" v-model="firstName"> <br>
+    名:<input name="lastName" v-model="lastName"> <br>
+    <br>
+    姓名: {{ fullName }} <br>
+    姓名: {{ fullName }} <br>
+    姓名: {{ fullName2 }} <br>
+    姓名: {{ fullName2 }} <br>
+    姓名: {{ fullName2 }} <br>
+</div>
+
+
+<script>
+    const vm = new Vue({
+        data() {
+            return {
+                a: 'ab',
+                firstName: '张',
+                lastName: '三'
+            }
+        },
+        // 计算属性 只有当依赖的值改变时才会刷新(新值和旧值进行对比)
+        computed: {
+            // allName是一个属性，简写成了这样的形式
+            fullName() {
+                console.log("computed中的get函数执行了")
+                return this.firstName + '  --  ' + this.lastName
+            },
+
+            // 写全格式
+            fullName2: {
+                get: function () {
+                    return "get返回的值"
+                },
+                set: function (val) {
+                    console.log(val)
+                    console.log("set函数执行了")
+                    this.firstName = "aa"
+                    this.lastName = "bb"
+                }
+            }
+        }
+    })
+    vm.$mount("#app")
+    Vue.config.devtools = false
+    Vue.config.productionTip = false
+</script>
+</body>
+</html>

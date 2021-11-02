@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01计算属性 姓名案例.html</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    {{ a }} <br>
+    姓:<input name="firstName" v-model="firstName"> <br>
+    名:<input name="lastName" v-model="lastName"> <br>
+    <br>
+    姓名: {{ fullName }} <br>
+    姓名: {{ fullName }} <br>
+</div>
+
+
+<script>
+    const vm = new Vue({
+        data() {
+            return {
+                a: 'ab',
+                firstName: '张',
+                lastName: '三',
+                fullName: ''
+            }
+        },
+        watch: {
+
+            // 如果firstName发生改变，这个函数就会执行  简写
+            firstName(newValue, oldValue) {
+                console.log('firstName被监控到改变了...');
+                this.fullName = newValue + '  --  ' + this.lastName
+            },
+
+            // 如果firstName发生改变，这个函数就会执行  完整写法
+            lastName: {
+                // 深度监听属性内部
+                deep: true,
+                // 在初始化时会执行一次
+                immediate: true,
+                // 完整写法中函数名必须是handler
+                handler(newValue, oldValue) {
+                    console.log('lastName被监控到改变了...');
+                    this.fullName = this.firstName + '  --  ' + newValue
+                }
+            }
+        }
+    })
+    vm.$mount("#app")
+    Vue.config.devtools = false
+    Vue.config.productionTip = false
+
+    //  使用API的形式来实现watch, 第一个参数:要监听的属性/表达式/函数   第二个参数: handler(属性被改变时触发)
+    //  返回值是一个函数，执行后可以停止该watch
+    var unwatch = vm.$watch('property', function (newValue, oldValue) {
+        console.log('property 被改变了');
+    })
+    unwatch()
+</script>
+</body>
+</html>

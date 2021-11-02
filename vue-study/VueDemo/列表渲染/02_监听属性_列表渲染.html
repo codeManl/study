@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    搜索: <input name="name" v-model="keyword">
+    <button @click="sortType = 1">升序</button>
+    <button @click="sortType = 2">降序</button>
+    <button @click="sortType = 0">不排序</button>
+    <hr>
+    <ul v-for="(item,index) in filPersons" :key="item.id">
+        <li>{{ item.name }}--{{ item.age }}--{{ item.id }}</li>
+    </ul>
+</div>
+<script>
+    const vm = new Vue({
+        data() {
+            return {
+                persons: [
+                    {id: 1, name: 'zs', age: 19},
+                    {id: 2, name: 'ls', age: 11},
+                    {id: 4, name: 'ww', age: 111},
+                    {id: 3, name: 'ww', age: 22}
+                ],
+                keyword: '',
+                sortType: 0
+            }
+        },
+        computed: {
+            filPersons() {
+                let arr = this.persons.filter((person) => {
+                    return person.name.indexOf(this.keyword) !== -1
+                })
+                if (this.sortType) {
+                    arr.sort((a1, a2) => {
+                        return this.sortType === 1 ? a1.age - a2.age : a2.age -a1.age
+                    })
+                }
+                return arr
+
+            }
+        },
+        methods: {}
+    })
+    vm.$mount("#app")
+    Vue.config.devtools = false
+    Vue.config.productionTip = false
+</script>
+</body>
+</html>

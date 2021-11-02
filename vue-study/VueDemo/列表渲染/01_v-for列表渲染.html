@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+
+    <!--    v-for遍历渲染  :key要是能唯一确定item,应使用数据中的唯一标识，而不是使用下标作为key(在input中会出错)  -->
+    <h1>渲染数组</h1>
+    <ul v-for="(item,index) in arr" :key="item.id">
+        <li>{{ item }}---{{ index }}---{{ item.name }}---{{ item.age }}</li>
+    </ul>
+    <hr>
+    <h1>渲染对象</h1>
+    <ul v-for="(value,key) in obj" :key="key">
+        <li>{{ value }}---{{ key }}</li>
+    </ul>
+    <hr>
+    <h1>渲染字符串</h1>
+    <ul v-for="(char,index) in str" :key="index">
+        <li>{{ char }}---{{ index }}</li>
+    </ul>
+    <hr>
+    <h1>遍历数字 第一个参数是真实值，第二个参数是下标</h1>
+    <ul v-for="(value,key) in num" :key="key">
+        <li>{{ value }}---{{ key }}</li>
+    </ul>
+</div>
+<script>
+    Vue.config.devtools = false
+    Vue.config.productionTip = false
+    const vm = new Vue({
+        data() {
+            return {
+                arr: [
+                    {id: 1, name: 'zs', age: 19},
+                    {id: 2, name: 'ls', age: 11},
+                    {id: 3, name: 'ww', age: 22}
+                ],
+                obj: {
+                    id: 1,
+                    name: 'zs',
+                    age: 19
+                },
+                str: 'helloWorld',
+                num: 5
+            }
+        }
+    })
+    vm.$mount("#app")
+</script>
+</body>
+</html>
