@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/dayjs/1.10.6/dayjs.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <h3> 时间戳 --{{ time }}</h3>
+    <h3> 使用method格式化时间 --{{ getTime() }}</h3>
+    <h3> 使用computed格式化时间 --{{ timeFormatted }}</h3>
+    <h3> 使用computed格式化时间 --{{ timeFormatted2 }}</h3>
+    <button @click="clickA">eeeeee</button>
+    <button @click="clickB">eeeeee</button>
+    <h3> 使用filter格式化时间 --{{ time | filterName }}</h3>
+    <h3> 使用filter格式化时间 --{{ time | filterName | filterName2 }}</h3>
+    <h3> 使用filter格式化时间 --{{ time | filterNameA('YYYYMMDD','fafsadf') | filterName2 }}</h3>
+    <h3> 使用定义的全局filter格式化时间 --{{ time | globalFilter }}</h3>
+    <h3 :x="msg | filterName2">filter对v-bind属性进行过滤 打开f12</h3>
+<!--    <h3 v-model="msg | filterName2">filter不能对v-model绑定的属性过滤</h3>-->
+
+</div>
+<script>
+    Vue.config.productionTip = false
+    // 全局过滤器不需要写在new Vue()之前, 但是必须写在渲染之前,也就是mount之前
+    Vue.filter('globalFilter', function (value) {
+        console.log('定义了一个全局过滤器,不同的vue实例都可以调用 ')
+        return dayjs(value).format('YYYY-MM-DD HH:mm:ss')
+    })
+
+    const vm = new Vue({
+        data() {
+            return {
+                time: 1637843564000,
+                msg: 'hello'
+            }
+        },
+        computed: {
+            timeFormatted() {
+                return dayjs(this.time).format('YYYY-MM-DD HH:mm:ss')
+            },
+            timeFormatted2: {
+                get() {
+                    console.log(">>>>>>>>>")
+                    return 111
+                },
+                set(newVal) {
+                    console.log(newVal)
+                    console.log("lalalal")
+                }
+            }
+        },
+        methods: {
+            getTime() {
+                return dayjs(this.time).format('YYYY-MM-DD HH:mm:ss')
+            },
+            clickA() {
+                this.timeFormatted2 = 333
+            },
+            clickB() {
+                this.timeFormatted2 = 444
+            }
+        },
+        // 过滤器的使用
+        // 过滤器不会改变原来的值
+        filters: {
+            filterName(value) {
+                console.log(value)
+                return dayjs(value).format('YYYY-MM-DD HH:mm:ss')
+            },
+            // filter可以由多个过滤器来组成过滤器链,将前一个过滤器过滤后的结果作为参数传入下一个过滤器,相当于filter的第一个参数
+            filterName2(value) {
+                return value.toString().substr(0, 6)
+            },
+            //第一个参数是默认给的,需要过滤的参数,之后的参数在调用时传入
+            filterNameA(a, b, c) {
+                console.log('a: ', a)
+                console.log('b: ', b)
+                console.log('c: ', c)
+                return dayjs(a).format(b)
+            }
+        }
+
+    })
+
+    vm.$mount("#app")
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <ul v-for="(item,index) in persons2" :key="item.id">
+        <li>{{ item.name }}--{{ item.age }}--{{ item.id }}</li>
+    </ul>
+    <button @click="changePerson">更新第一列</button>
+</div>
+<script>
+    const vm = new Vue({
+        data() {
+            return {
+                persons: [
+                    {id: 1, name: 'zs', age: 19},
+                    {id: 2, name: 'ls', age: 11},
+                    {id: 4, name: 'ww', age: 111},
+                    {id: 3, name: 'ww', age: 22}
+                ],
+                persons2: [],
+                keyword: '',
+                sortType: 0
+            }
+        },
+
+        methods: {
+            changePerson() {
+                // 这种是可行的
+                /*      this.persons[0].id = 6
+                      this.persons[0].name = '啊啊'
+                      this.persons[0].age = 112*/
+                // 这种不可行,虽然实际值改变了，但没有渲染到页面
+                // this.persons[0] = {id: 2, name: '啊啊', age: 112}
+                this.persons2 = []
+                this.persons2 = [
+                    {id: 1, name: 'zs', age: 19},
+                    {id: 2, name: 'ls', age: 11},
+                    {id: 4, name: 'ww', age: 111},
+                    {id: 3, name: 'ww', age: 22}
+                ]
+            }
+        }
+    })
+    vm.$mount("#app")
+    Vue.config.productionTip = false
+</script>
+</body>
+</html>

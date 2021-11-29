@@ -49,12 +49,11 @@
         }
     })
     vm.$mount("#app")
-    Vue.config.devtools = false
     Vue.config.productionTip = false
 
     //  使用API的形式来实现watch, 第一个参数:要监听的属性/表达式/函数   第二个参数: handler(属性被改变时触发)
     //  返回值是一个函数，执行后可以停止该watch
-    var unwatch = vm.$watch('property', function (newValue, oldValue) {
+    var unwatch = this.$watch('property', function (newValue, oldValue) {
         console.log('property 被改变了');
     })
     unwatch()

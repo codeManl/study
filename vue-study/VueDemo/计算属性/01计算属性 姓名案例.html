@@ -16,6 +16,9 @@
     姓名: {{ fullName2 }} <br>
     姓名: {{ fullName2 }} <br>
     姓名: {{ fullName2 }} <br>
+
+    <button @click="clickA">无限赋值</button>
+    <button @click="clickB">单次赋值</button>
 </div>
 
 
@@ -41,12 +44,34 @@
                 get: function () {
                     return "get返回的值"
                 },
+                // set()在赋值时会调用，不是调用set()来赋值
                 set: function (val) {
                     console.log(val)
                     console.log("set函数执行了")
                     this.firstName = "aa"
                     this.lastName = "bb"
                 }
+            },
+            fullName3: {
+                get() {
+                    return '计算属性的function可以简写(get)'
+                },
+                // set()在赋值时会调用，不是调用set()来赋值
+                set(newVal) {
+                    console.log('计算属性的function可以简写(set)')
+                    // 如果在set()里对本身赋值，则无限调用set()最终导致
+                    // vue.js:634 [Vue warn]: Error in v-on handler: "RangeError: Maximum call stack size exceeded"
+                    // 这行代码禁止写
+                    // this.fullName3 = newVal
+                }
+            }
+        },
+        methods: {
+            clickA() {
+                this.fullName3 = 'a'
+            },
+            clickB() {
+                this.fullName2 = 'b'
             }
         }
     })
