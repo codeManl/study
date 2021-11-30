@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+<!-- v-pre属性会使其所在节点跳过vue渲染，直接解析成html,可以加快编译   -->
+    <h1></h1>
+</div>
+<script>
+    // 该配置说明不启用chrome的devtools插件
+    // Vue.config.devtools = false
+    Vue.config.productionTip = false
+    const vm = new Vue({
+        data() {
+            return {
+
+            }
+        }
+    })
+    vm.$mount("#app")
+</script>
+</body>
+</html>

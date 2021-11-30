@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h1>当前n值是:<span v-text="n"></span></h1>
+    <h1>放大10倍的n值为:<span v-big="n"></span></h1>
+    <button @click="n++">点我n+1</button>
+</div>
+<script>
+    // 该配置说明不启用chrome的devtools插件
+    // Vue.config.devtools = false
+    Vue.config.productionTip = false
+    const vm = new Vue({
+        data() {
+            return {
+                n: 1
+            }
+        },
+        directives: {
+            // 第一个参数是该指令所在的真实dom元素
+            // 第二个参数是一个对象，包含name,value,oldValue,expression,arg,modifiers
+            // 参考 https://cn.vuejs.org/v2/guide/custom-directive.html
+            big(element, binding) {
+                console.log(element)
+                console.log(binding)
+                element.innerText = binding.value * 10
+            }
+        }
+    })
+    vm.$mount("#app")
+</script>
+</body>
+</html>
