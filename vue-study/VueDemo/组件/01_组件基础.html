@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    {{ msg }}
+    <school></school>
+    <school></school>
+    <class1></class1>
+    <hr>
+    <student></student>
+</div>
+<div id="app2">
+    <class1></class1>
+</div>
+<script>
+    // 该配置说明不启用chrome的devtools插件
+    // Vue.config.devtools = false
+
+    //第一步: 使用Vue.extend()来创建组件
+    const school = Vue.extend({
+        template: `
+          <div>
+          <h1>学校名称:{{ name }}</h1>
+          <h1>学校地址:{{ address }}</h1>
+          </div>
+        `,
+        data() {
+            return {
+                name: '学校名',
+                address: '学校地址'
+            }
+        }
+    });
+    const student = Vue.extend({
+        template: `
+          <div>
+          <h1>学生名称:{{ name }}</h1>
+          <h1>学生年龄:{{ age }}</h1>
+          </div>
+        `,
+        data() {
+            return {
+                name: '学校名',
+                age: 18
+            }
+        }
+    });
+    const class1 = Vue.extend({
+        template: `
+          <div>
+          <h1>班级名称:{{ name }}</h1>
+          <h1>班级编号:{{ num }}</h1>
+          <button @click="clickA">点我一下</button>
+          </div>
+        `,
+        data() {
+            return {
+                name: '班级名',
+                num: 122
+            }
+        },
+        methods: {
+            clickA() {
+                console.log(class1.prototype.__proto__ === Vue.prototype)
+            }
+        }
+    });
+    Vue.config.productionTip = false
+    Vue.component("class1", class1)
+    const vm = new Vue({
+        components: {
+            // 第二步: 注册组件(局部) 或者全局注册组件
+            school,
+            student
+        },
+        data() {
+            return {
+                msg: 'aaa'
+            }
+        }
+    })
+    vm.$mount("#app")
+
+
+    const vm2 = new Vue({
+        components: {
+            // 第二步: 注册组件(局部) 或者全局注册组件
+            school,
+            student
+        },
+        data() {
+            return {
+                msg: 'aaa'
+            }
+        }
+    })
+    vm2.$mount("#app2")
+</script>
+</body>
+</html>
