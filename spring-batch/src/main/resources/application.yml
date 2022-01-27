@@ -1,0 +1,16 @@
+server:
+  port: 3030
+spring:
+  application:
+    name: spring-batch
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://120.53.247.7:3306/spring-batch?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: pwd=142857
+  batch:
+    job:
+      # 为false说明job不会一启动项目就执行
+      enabled: false
+#      names: EODJob

@@ -13,7 +13,7 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
  * @description 代码生成器
  * @date 2021/10/19 16:47
  */
-public class CodeGenerator {
+public class CodeGeneratorMysql {
     public static void main(String[] args) {
         // 1、创建代码生成器
         AutoGenerator mpg = new AutoGenerator();
@@ -34,13 +34,13 @@ public class CodeGenerator {
         //定义生成的实体类中日期类型
         gc.setDateType(DateType.ONLY_DATE);
         //开启Swagger2模式
-        gc.setSwagger2(true);
+        gc.setSwagger2(false);
 
         mpg.setGlobalConfig(gc);
 
         // 3、数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/jeecg-boot?serverTimezone=GMT%2B8");
+        dsc.setUrl("jdbc:mysql://localhost:3306/fcdt?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("pwd=142857");
@@ -51,7 +51,7 @@ public class CodeGenerator {
         PackageConfig pc = new PackageConfig();
         // 模块名
         pc.setModuleName(null);
-        pc.setParent("com.");
+        pc.setParent("com");
         pc.setController("controller");
         pc.setEntity("entity");
         pc.setService("service");
@@ -60,8 +60,8 @@ public class CodeGenerator {
 
         // 5、策略配置
         StrategyConfig strategy = new StrategyConfig();
-        //对那一张表生成代码
-        strategy.setInclude("t8_bond_deal_info");
+        //对那一张表生成代码  表名用大写
+        strategy.setInclude("TQ_BD_PROOPTION_NEW");
         //数据库表映射到实体的命名策略
         strategy.setNaming(NamingStrategy.underline_to_camel);
         //生成实体时去掉表前缀

@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>java8feature</artifactId>
+    <artifactId>spring-batch</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -18,7 +18,6 @@
 
     <dependencies>
 
-
         <dependency>
             <groupId>com.codemanl</groupId>
             <artifactId>codemanl-base</artifactId>
@@ -26,15 +25,10 @@
         </dependency>
 
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-batch</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
 
     </dependencies>
 </project>
