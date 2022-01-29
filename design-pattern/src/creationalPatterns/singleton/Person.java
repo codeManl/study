@@ -1,4 +1,4 @@
-package singleton;
+package creationalPatterns.singleton;
 
 /**
  * 实体类
@@ -23,16 +23,16 @@ public class Person {
  * 懒汉式(懒加载),使用双重检查锁来保证线程安全
  */
 class Person2 {
-    private static Person2 person;
+    private static  Person2 person2;
 
     public static Person2 getInstance() {
-        if (person == null) {
+        if (person2 == null) {
             synchronized (Person2.class) {
-                if (person == null) {
-                    person = new Person2();
+                if (person2 == null) {
+                    person2 = new Person2();
                 }
             }
         }
-        return person;
+        return person2;
     }
 }
