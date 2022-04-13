@@ -16,9 +16,9 @@ public class ResponsibilityTest {
         AbstractLogger debugLogger = new DEBUGLogger(AbstractLogger.DEBUG);
         AbstractLogger errorLogger = new ERRORLogger(AbstractLogger.ERROR);
 
-        errorLogger.setNextLogger(debugLogger);
-        debugLogger.setNextLogger(infoLogger);
-        return errorLogger;
+        infoLogger.setNextLogger(debugLogger);
+        debugLogger.setNextLogger(errorLogger);
+        return infoLogger;
     }
 
 }
