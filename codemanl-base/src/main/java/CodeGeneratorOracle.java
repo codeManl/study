@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
+import java.util.Arrays;
+
 /**
  * @author 刘乐乐
  * @description 代码生成器
@@ -42,8 +44,8 @@ public class CodeGeneratorOracle {
         DataSourceConfig dsc = new DataSourceConfig();
         dsc.setUrl("jdbc:oracle:thin:@localhost:1521:orcl");
         dsc.setDriverName("oracle.jdbc.OracleDriver");
-        dsc.setUsername("ljyh");
-        dsc.setPassword("ljyh");
+        dsc.setUsername("lj");
+        dsc.setPassword("lj");
         dsc.setDbType(DbType.ORACLE);
         mpg.setDataSource(dsc);
 
@@ -51,17 +53,16 @@ public class CodeGeneratorOracle {
         PackageConfig pc = new PackageConfig();
         // 模块名
         pc.setModuleName(null);
-        pc.setParent("com.kayakwise.etl.finchina");
+        pc.setParent("com.kayak.newast.group");
         pc.setController("controller");
         pc.setEntity("entity");
         pc.setService("service");
         pc.setMapper("mapper");
         mpg.setPackageInfo(pc);
-
         // 5、策略配置
         StrategyConfig strategy = new StrategyConfig();
         //对那一张表生成代码  表名用大写
-        strategy.setInclude("T8_BOND_IMPORTRECORD");
+        strategy.setInclude("GROUP_IMPORT_LOG");
         //数据库表映射到实体的命名策略
         strategy.setNaming(NamingStrategy.underline_to_camel);
         //生成实体时去掉表前缀
@@ -69,7 +70,7 @@ public class CodeGeneratorOracle {
         //数据库表字段映射到实体的命名策略
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
         // lombok 模型 @Accessors(chain = true) setter链式操作
-        strategy.setEntityLombokModel(true);
+        strategy.setEntityLombokModel(false);
         //restful api风格控制器
         strategy.setRestControllerStyle(true);
         //url中驼峰转连字符
